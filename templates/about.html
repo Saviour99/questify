@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <title>Questifty</title>
+</head>
+  <body id="about">
+    <header>
+        <nav id="nav" class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container">
+              <a class="navbar-brand" href="#">Questify</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ms-auto">
+                  <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                  <a class="nav-link active" href="{{ url_for('about') }}">About Us</a>
+                  <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                  <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
+                </div>
+              </div>
+            </div>
+          </nav>
+    </header>
+    <section id="about">
+      <div class="container">
+          <div class="row">
+              <div class="section-title">
+                <h1 id="about-text" class="display-6 fw-semibold text-center text-black mt-3" data-aos="fade-right" data-aos-duration="1500">About Us</h1>
+                <div class="line" data-aos="fade-left" data-aos-duration="1500"></div>
+              </div>
+          </div>
+      </div>
+    </section>
+    <section class="section-info">
+      <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+          <div class="col-lg-8 col-sm-11" data-aos="fade-up" data-aos-duration="1500">
+            <p class="about-item">
+              Questify is a powerful web application designed to simplify the process of creating practice quizzes and assessments for students and educators. By allowing users to upload their course materials in the form of PDF files and slide presentations, Questify leverages robust text extraction algorithms to analyze the content from these sources.</p>
+            </p>
+            <p class="about-item">
+              At the core of Questify lies its ability to generate relevant and random multiple-choice questions (MCQs) based on the uploaded materials and the length of the content. Each generated MCQ consists of a well-crafted question stem, four answer options (labeled A, B, C, and D), and a clearly marked correct answer, ensuring an engaging learning experience.
+            </p>
+            <p class="about-item">
+              Questify's text extraction capabilities allow it to handle a wide range of file formats, layouts, and embedded media, ensuring accurate and comprehensive content analysis. This ensures that the generated MCQs are directly relevant to the source material, promoting active learning and engagement with the subject matter.
+            </p>
+            <p class="about-item">
+              To use Questify, simply visit the homepage and click on the "Get Started" button. From there, you can upload your course materials, such as lecture notes, coursentextbooks, or slide presentations, in PDF or PowerPoint format. The application will then process the content and generate a set of MCQs tailored to the length of the uploaded material.
+            </p>
+            <p class="about-item">
+              By automating the process of generating MCQs from course materials, Questify empowers students and educators to create practice quizzes, self-assessments, and supplementary materials with ease, saving time and effort that would otherwise be spent manually writing questions. This innovative application streamlines the learning process, promoting self-directed study and providing a valuable tool for educators to enhance their teaching materials.
+            </p>
+          </div>
+        </div> 
+      </div>
+    </section>
+    <footer id="foot" class="bg-body-tertiary">
+        <div class="container">
+            <div class="row">
+                <p id="footer" class="mt-2 mb-2 text-black text-center ">Questify Copyright © 2024. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{{ url_for('static', filename='scripts/index.js') }}"></script>
+</body>
+</html>
