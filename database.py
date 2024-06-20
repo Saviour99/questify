@@ -3,10 +3,14 @@ from werkzeug.utils import secure_filename
 import os
 from PyPDF2 import PdfReader
 from generator import Objective  # The Objective class is in the 'generator' module
-import logging
+from flask_sqlalchemy import SQLAlchemy
+import datetime
 
 app = Flask(__name__)
-app.secret_key = 'Dela'  # Required for session management
+app.secret_key = 'your_secret_key'  # Replace with your secret key
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://username:password@localhost/database_name'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
 upload_folder = 'uploads'
 app.config['UPLOAD_FOLDER'] = upload_folder
@@ -15,8 +19,21 @@ app.config['UPLOAD_FOLDER'] = upload_folder
 if not os.path.exists(upload_folder):
     os.makedirs(upload_folder)
 
-# Setup logging
-logging.basicConfig(level=logging.DEBUG)
+# Define the model for the MCQ table
+class MCQ(db.Model):
+    source_file_id = db.Column(db.Integer, primary_key=True)
+    question_id = db.Column(db.Integer, nullable=False, autoincrement=True)
+    question = db.Column(db.String(300), nullable=False)
+    option_a = db.Column(db.String(100), nullable=False)
+    option_b = db.Column(db.String(100), nullable=False)
+    option_c = db.Column(db.String(100), nullable=False)
+    option_d = db.Column(db.String(100), nullable=False)
+    answer = db.Column(db.String(100), nullable=False)
+    file_name = db.Column(db.String(100), nullable=False)
+    timestamp = db.Column(db.String(50), nullable=False, default=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+
+# Create the table if it doesn't exist
+db.create_all()
 
 @app.route("/")
 @app.route("/home")
@@ -54,16 +71,27 @@ def uploaded_file():
                 page = reader.pages[page_num]
                 content += page.extract_text()
 
-        app.logger.debug("Text Content")
+        app.logger.debug("Text Content: %s", content)
 
         objective = Objective(content, noOfQues=10)
         mcq_data = objective.generate_test()
 
         app.logger.debug("MCQ Data Generated: %s", mcq_data)
 
-        # Store the mcq_data in the session
-        session['mcq_data'] = mcq_data
-        app.logger.debug("Stored MCQ Data in session: %s", session['mcq_data'])
+        # Store mcq_data in the MySQL database
+        for mcq in mcq_data:
+            new_mcq = MCQ(
+                source_file_id=1,  # Example: Replace with actual source_file_id if applicable
+                question=mcq['Question'],
+                option_a=mcq['Options'][0],
+                option_b=mcq['Options'][1],
+                option_c=mcq['Options'][2],
+                option_d=mcq['Options'][3],
+                answer=mcq['Answer'],
+                file_name=filename
+            )
+            db.session.add(new_mcq)
+        db.session.commit()
 
         return redirect(url_for('upload_mcqs'))
     else:
@@ -71,9 +99,8 @@ def uploaded_file():
 
 @app.route('/upload/mcqs', methods=['GET'])
 def upload_mcqs():
-    mcqs = session.get('mcq_data', None)  # Retrieve the content from session
-    app.logger.debug("Retrieved MCQ Data from session: %s", mcqs)
-    return render_template("mcqs.html", mcqs=mcqs)  # Pass content to the template
+    mcqs = MCQ.query.all()
+    return render_template("mcqs.html", mcqs=mcqs)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -19,9 +19,9 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                  <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                  <a class="nav-link active" href="{{ url_for('home') }}">Home</a>
                   <a class="nav-link" href="{{ url_for('about') }}">About Us</a>
-                  <a class="nav-link active" href="{{ url_for('contact') }}">Contact</a>
+                  <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
                   <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
                 </div>
               </div>
@@ -33,7 +33,7 @@
         <div class="row">
           <div class="col-lg-12 col-sm-10 col-12 upload-main">
             <form action="#">
-              <input type="file" name="file" id="file-upload" accept="" hidden>
+              <input type="file" name="file" id="file-upload" accept=".pdf" hidden>
               <div class="qna-info">
                 <div class="qna-info-content">
                   <div class="icon">

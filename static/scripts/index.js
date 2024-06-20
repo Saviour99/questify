@@ -6,6 +6,7 @@ const uploadingFile = document.querySelector(".uploading-area");
 const uploadedFile = document.querySelector(".uploaded-area");
 const generate = document.querySelector(".gen");
 const failed = document.querySelector(".failed");
+const textContent = document.querySelector(".generate");
 
 form.addEventListener("click", () => {
     input.click();
@@ -71,9 +72,37 @@ function uploadFile(name) {
     xhr.send(formData);                     /* Sending the formData to python backend */
 }
 
-generate.addEventListener("click", () => {
+/*generate.addEventListener("click", () => {
     if (input.files.length === 0) {          // Check if no file is selected
         let noFile = `<div class="row" data-aos="fade-left" data-aos-duration="1500">Please upload your file in the box above.</div>`;
         failed.innerHTML = noFile;
     }
-});
+});*/
+
+function fileRetrieval(){
+    let file = input.files[0];
+    if (!file){
+        let noFile = `<div class="row" data-aos="fade-left" data-aos-duration="1500">Please upload your file in the box above.</div>`;
+        failed.innerHTML = noFile;
+        return;
+    }
+
+    /* const formData = new FormData();
+    formData.append('file', file);
+
+    fetch('/upload', {
+        "method": "POST",
+        "body": formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.text){
+            console.log(data.text)
+            let contents = `<h1 class="">Generated Text from PyPDF2</h1>
+                            <pre>${data.text}</pre>`; // contains the retrieved text data.text  
+            textContent.innerHTML = contents;
+    }
+  }); */
+}
+
+generate.addEventListener("click", fileRetrieval); // Attach click event to generate button

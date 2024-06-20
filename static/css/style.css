@@ -344,3 +344,19 @@ span {
     margin-left: 230px;
     font-family: var(--font);
 }
+
+.mcq {
+    margin-bottom: 20px;
+}
+
+.mcq p {
+    font-weight: bold;
+}
+
+.mcq ul {
+    padding: 0;
+}
+
+.mcq li {
+    margin: 5px 0;
+}
