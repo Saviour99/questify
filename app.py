@@ -10,7 +10,7 @@ from collections import Counter
 import random
 from pptx import Presentation
 import PyPDF2
-from PyPDF2 import PdfReader, PdfWriter  # Import PdfReader
+from PyPDF2 import PdfReader  # Import PdfReader
 
 
 app = Flask(__name__)
