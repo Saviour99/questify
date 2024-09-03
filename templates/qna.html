@@ -1,76 +1,70 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <title>Questifty</title>
-  </head>
-  <body class="bg-body-tertiary">
-    <header>
-        <nav id="nav" class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container">
-              <a class="navbar-brand" href="#">Questify</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ms-auto">
-                  <a class="nav-link active" href="{{ url_for('home') }}">Home</a>
-                  <a class="nav-link" href="{{ url_for('about') }}">About Us</a>
-                  <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
-                  <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
-                </div>
-              </div>
-            </div>
-          </nav>
-    </header>
-    <section class="qna-body">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 col-sm-10 col-12 upload-main">
-            <form action="#">
-              <input type="file" name="file" id="file-upload" accept=".pdf" hidden>
-              <div class="qna-info">
-                <div class="qna-info-content">
-                  <div class="icon">
-                    <div>
-                      <i class="fa-solid fa-cloud-arrow-up"></i>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <title>Questify</title>
+    </head>
+    <body id="about">
+        <header>
+            <nav id="nav" class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container">
+                    <a class="navbar-brand" href="#">Questify</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav ms-auto">
+                            <a class="nav-link active" href="{{ url_for('home') }}">Home</a>
+                            <a class="nav-link" href="{{ url_for('about') }}">About Us</a>
+                            <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                            <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
+                        </div>
                     </div>
-                  </div>
-                  <div class="info">
-                    <p>Click to Upload</p>
-                  </div>
                 </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="failed"></div>
-        <div class="upload">  
-          <div class="uploading-area"></div>
-          <div class="uploaded-area"></div>
-        </div>
-        <div class="row text-center">
-          <div id="gen-body" class="col-lg-12 col-sm-12">
-            <a href="{{ url_for('upload_mcqs') }}" class="btn btn-brand ms-2 gen">Generate</a>
-        </div>
-      </div>
-    </section>
-    <footer id="foot" class="bg-body-tertiary">
-      <div class="container">
-          <div class="row">
-              <p id="footer" class="mt-2 mb-2 text-black text-center ">Questify Copyright © 2024. All Rights Reserved.</p>
-          </div>
-      </div>
-    </footer>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://kit.fontawesome.com/99a02b1b56.js" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='scripts/index.js') }}"></script>
-  </body>
+            </nav>
+        </header>
+        <section class="mcqs_page bg-body-tertiary">
+            <h1 class="pt-4 text-center">Generated MCQs</h1>
+            <div class="container" id="mcqs-container">
+                {% for index, mcq in mcqs %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Q{{ index }}: {{ mcq[0] }}</h5>
+                            <form>
+                                {% set options = ['A', 'B', 'C', 'D'] %}
+                                {% set num_choices = mcq[1]|length %}
+                                {% for choice_index in range(num_choices) %}
+                                    <div class="form-check col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <input class="form-check-input" type="radio" name="answer{{ index }}" id="choice{{ index }}{{ choice_index }}" value="{{ choice_index }}">
+                                        <label class="form-check-label" for="choice{{ index }}{{ choice_index }}">
+                                            {{ options[choice_index] }}: {{ mcq[1][choice_index] }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </form>
+                            <!-- Display the correct answer with a class -->
+                            <small class="correct-answer text-primary">Correct Answer: {{ mcq[2] }}</small>
+                        </div>
+                    </div>
+                {% endfor %}
+                <!-- Button to show results -->
+                <button id="show-results-btn" class="btn btn-primary mb-5" data-showing="false" onclick="toggleResults()">Show Results</button>
+            </div>
+        </section>
+        <footer id="foot" class="bg-body-tertiary">
+            <div class="container">
+                <div class="row">
+                    <p id="footer" class="mt-2 text-black text-center">Questify Copyright © 2024. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script src="{{ url_for('static', filename='scripts/index.js') }}"></script>
+    </body>
 </html>

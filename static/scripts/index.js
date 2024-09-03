@@ -1,12 +1,10 @@
+/* Handles the animations on the pages */
 AOS.init();
 
-const form = document.querySelector("form");
+const form = document.querySelector(".upload-main");
 const input = document.querySelector("#file-upload");
 const uploadingFile = document.querySelector(".uploading-area");
 const uploadedFile = document.querySelector(".uploaded-area");
-const generate = document.querySelector(".gen");
-const failed = document.querySelector(".failed");
-const textContent = document.querySelector(".generate");
 
 form.addEventListener("click", () => {
     input.click();
@@ -26,7 +24,6 @@ input.onchange = ({target}) => {
 
 function uploadFile(name) {
     let xhr = new XMLHttpRequest();         /* craeting a new xml object */
-    xhr.open("POST", "/upload");    /* Using the post method sends the xml object to the specified URL */
     xhr.upload.addEventListener("progress", ({loaded, total}) => {
         let fileLoaded = Math.floor((loaded / total) * 100) /* Getting the percentage of the file size */
         let fileTotal = Math.floor(total / 1000) /* Getting the file size in KB */
@@ -68,41 +65,39 @@ function uploadFile(name) {
         uploadedFile.innerHTML = uploadedHTML;
         }
     });
-    let formData = new FormData(form);      /* Creating a new formData object */ 
-    xhr.send(formData);                     /* Sending the formData to python backend */
+    xhr.open("POST", "/upload/");
+    let formData = new FormData();      /* Creating a new formData object */
+    formData.append('file', input.files[0]);
+    xhr.send(formData);
 }
 
-/*generate.addEventListener("click", () => {
-    if (input.files.length === 0) {          // Check if no file is selected
-        let noFile = `<div class="row" data-aos="fade-left" data-aos-duration="1500">Please upload your file in the box above.</div>`;
-        failed.innerHTML = noFile;
-    }
-});*/
+/* Handle showing results */
 
-function fileRetrieval(){
-    let file = input.files[0];
-    if (!file){
-        let noFile = `<div class="row" data-aos="fade-left" data-aos-duration="1500">Please upload your file in the box above.</div>`;
-        failed.innerHTML = noFile;
-        return;
-    }
+function toggleResults() {
+    const showResultButton = document.querySelector("#show-results-btn");
+    const correctAnswers = document.getElementsByClassName('correct-answer');
+    
+    let isShowing = showResultButton.getAttribute('data-showing') === 'true';
 
-    /* const formData = new FormData();
-    formData.append('file', file);
-
-    fetch('/upload', {
-        "method": "POST",
-        "body": formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.text){
-            console.log(data.text)
-            let contents = `<h1 class="">Generated Text from PyPDF2</h1>
-                            <pre>${data.text}</pre>`; // contains the retrieved text data.text  
-            textContent.innerHTML = contents;
+    if (isShowing) {
+        // Hide results
+        for (let i = 0; i < correctAnswers.length; i++) {
+            correctAnswers[i].style.display = 'none';
+        }
+        // Update the button's text and style
+        showResultButton.textContent = "Show Results";
+        showResultButton.classList.remove('btn-secondary');
+        showResultButton.classList.add('btn-primary');
+        showResultButton.setAttribute('data-showing', 'false');
+    } else {
+        // Show results
+        for (let i = 0; i < correctAnswers.length; i++) {
+            correctAnswers[i].style.display = 'block';
+        }
+        // Update the button's text and style
+        showResultButton.textContent = "Hide Results";
+        showResultButton.classList.remove('btn-primary');
+        showResultButton.classList.add('btn-secondary');
+        showResultButton.setAttribute('data-showing', 'true');
     }
-  }); */
 }
-
-generate.addEventListener("click", fileRetrieval); // Attach click event to generate button
