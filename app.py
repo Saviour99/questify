@@ -3,6 +3,7 @@
 # pip install spacy
 # pip install python-pptx
 # pip install PyPDF2
+# pip install flask-sqlalchemy
 
 from datetime import datetime
 from flask import Flask, render_template, request, make_response
