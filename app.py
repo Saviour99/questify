@@ -4,21 +4,50 @@
 # pip install python-pptx
 # pip install PyPDF2
 
+from datetime import datetime
 from flask import Flask, render_template, request, make_response
 import spacy
 from collections import Counter
 import random
+import os
+from flask_sqlalchemy import SQLAlchemy
 from pptx import Presentation
 import PyPDF2
 from PyPDF2 import PdfReader  # Import PdfReader
 
 
+# Retrieve environment variables
+DB_USERNAME = os.getenv('DB_USERNAME')
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+DB_NAME = os.getenv('DB_NAME')
+
 app = Flask(__name__)
+
+# Configure the SQLAlchemy part of the app instance
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{DB_USERNAME}:{DB_PASSWORD}@localhost/{DB_NAME}'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Create the SQLAlchemy db instance
+
+db = SQLAlchemy(app)
+# Define the Q&A model
+class QA(db.Model):
+    __tablename__ = 'qa_table'
+    source_file_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    file_name = db.Column(db.String(100), nullable=False)
+    question_id = db.Column(db.Integer, nullable=False)
+    question = db.Column(db.String(1000), nullable=False)
+    option_a = db.Column(db.String(400), nullable=False)
+    option_b = db.Column(db.String(400), nullable=False)
+    option_c = db.Column(db.String(400), nullable=False)
+    option_d = db.Column(db.String(400), nullable=False)
+    answer = db.Column(db.String(400), nullable=False)
+    timestamp = db.Column(db.String(50), nullable=False)
 
 # Load English tokenizer, tagger, parser, NER, and word vectors
 nlp = spacy.load("en_core_web_sm")
 
-def generate_mcqs(text, num_questions=5):
+def generate_mcqs(text, num_questions=5, filename=""):
     # text = clean_text(text)
     if text is None:
         return []
@@ -79,6 +108,22 @@ def generate_mcqs(text, num_questions=5):
 
             # Append the generated MCQ to the list
             correct_answer = chr(64 + answer_choices.index(subject) + 1)  # Convert index to letter
+
+            # Add to database
+            qa = QA(
+                file_name=filename,
+                question_id=len(mcqs) + 1,
+                question=question_stem,
+                option_a=answer_choices[0],
+                option_b=answer_choices[1],
+                option_c=answer_choices[2],
+                option_d=answer_choices[3],
+                answer=correct_answer,
+                timestamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            )
+            db.session.add(qa)
+            db.session.commit()
+
             mcqs.append((question_stem, answer_choices, correct_answer))
 
     return mcqs
@@ -138,7 +183,7 @@ def upload():
         else:
             return "Number of questions is missing", 400
 
-        mcqs = generate_mcqs(text, num_questions=num_questions)  # Pass the selected number of questions
+        mcqs = generate_mcqs(text, num_questions=num_questions, filename=file.filename)  # Pass the selected number of questions
         # Ensure each MCQ is formatted correctly as (question_stem, answer_choices, correct_answer)
         mcqs_with_index = [(i + 1, mcq) for i, mcq in enumerate(mcqs)]
         return render_template('qna.html', mcqs=mcqs_with_index)
@@ -178,6 +223,10 @@ def extract_pptx(file):
                 # Append the text to the string
                 text += shape.text
     return text
+
+# Create the database and table(s)
+with app.app_context():
+    db.create_all()
 
 if __name__ == '__main__':
     app.run(debug=True)
