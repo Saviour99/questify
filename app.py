@@ -37,7 +37,7 @@ class QA(db.Model):
     source_file_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     file_name = db.Column(db.String(100), nullable=False)
     question_id = db.Column(db.Integer, nullable=False)
-    question = db.Column(db.String(1000), nullable=False)
+    question = db.Column(db.String(9000), nullable=False)
     option_a = db.Column(db.String(400), nullable=False)
     option_b = db.Column(db.String(400), nullable=False)
     option_c = db.Column(db.String(400), nullable=False)
@@ -98,7 +98,7 @@ def generate_mcqs(text, num_questions=5, filename=""):
 
             # Ensure there are at least three distractors
             while len(distractors) < 3:
-                distractors.append("[Distractor]")  # Placeholder for missing distractors
+                distractors.append("None of the above")  # Placeholder for missing distractors
 
             random.shuffle(distractors)
             for distractor in distractors[:3]:
