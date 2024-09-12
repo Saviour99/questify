@@ -4,6 +4,7 @@
 # pip install python-pptx
 # pip install PyPDF2
 # pip install flask-sqlalchemy
+# pip install Flask-Migrate
 
 from datetime import datetime
 from flask import Flask, render_template, request, make_response
@@ -12,25 +13,33 @@ from collections import Counter
 import random
 import os
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from pptx import Presentation
 import PyPDF2
 from PyPDF2 import PdfReader  # Import PdfReader
+from dotenv import load_dotenv
 
+# Load environment variables from .env file
+load_dotenv()
 
 # Retrieve environment variables
 DB_USERNAME = os.getenv('DB_USERNAME')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
 DB_NAME = os.getenv('DB_NAME')
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_PORT = os.getenv('DB_PORT', 3306)
 
 app = Flask(__name__)
 
 # Configure the SQLAlchemy part of the app instance
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{DB_USERNAME}:{DB_PASSWORD}@localhost/{DB_NAME}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Create the SQLAlchemy db instance
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
 # Define the Q&A model
 class QA(db.Model):
     __tablename__ = 'qa_table'
