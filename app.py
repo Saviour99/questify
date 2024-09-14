@@ -4,7 +4,6 @@
 # pip install python-pptx
 # pip install PyPDF2
 # pip install flask-sqlalchemy
-# pip install Flask-Migrate
 
 from datetime import datetime
 from flask import Flask, render_template, request, make_response
@@ -13,7 +12,6 @@ from collections import Counter
 import random
 import os
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from pptx import Presentation
 import PyPDF2
 from PyPDF2 import PdfReader  # Import PdfReader
@@ -38,7 +36,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Create the SQLAlchemy db instance
 
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 
 # Define the Q&A model
 class QA(db.Model):
