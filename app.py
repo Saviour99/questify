@@ -48,6 +48,7 @@ class QA(db.Model):
 # Load English tokenizer, tagger, parser, NER, and word vectors
 nlp = spacy.load("en_core_web_sm")
 
+# Generate MCQS with four options A-D and the correct answer
 def generate_mcqs(text, num_questions=5, filename=""):
     if text is None:
         return []
@@ -76,6 +77,8 @@ def generate_mcqs(text, num_questions=5, filename=""):
                 answer_choices.append(distractor)
             random.shuffle(answer_choices)
             correct_answer = chr(64 + answer_choices.index(subject) + 1)
+
+            # Storing the output in the database
             qa = QA(
                 file_name=filename,
                 question_id=len(mcqs) + 1,
@@ -116,6 +119,7 @@ def mcqs():
 
 @app.route('/upload/', methods=['GET', 'POST'])
 def upload():
+    # Get the file from the frontend and send the output to the frontend
     if request.method == 'POST':
         text = ""
         if 'file' in request.files:
@@ -124,7 +128,7 @@ def upload():
                 if file.filename.endswith('.pdf'):
                     text += extract_pdf(file)
                 elif file.filename.endswith('.txt'):
-                    text += file.read().decode('utf-8')
+                    text += file.read().decode('utf-8') #Reading the content of the text file
                 elif file.filename.endswith('.pptx'):
                     text += extract_pptx(file)
             else:
@@ -146,6 +150,7 @@ def upload():
 
     return render_template('upload.html')
 
+# Extract the content from the PDF file
 def extract_pdf(file):
     text = ""
     pdf_reader = PdfReader(file)
@@ -155,6 +160,7 @@ def extract_pdf(file):
             text += page_text
     return text
 
+# Extract the content from the PowerPoint Presentation
 def extract_pptx(file):
     presentation = Presentation(file)
     text = ""
