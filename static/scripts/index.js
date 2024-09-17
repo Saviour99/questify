@@ -6,6 +6,7 @@ const input = document.querySelector("#file-upload");
 const uploadingFile = document.querySelector(".uploading-area");
 const uploadedFile = document.querySelector(".uploaded-area");
 
+/* Handles the file upload on the pages */
 form.addEventListener("click", () => {
     input.click();
 });
