@@ -23,6 +23,7 @@ input.onchange = ({target}) => {
     }
 };
 
+/* Handles the file loading on the pages */
 function uploadFile(name) {
     let xhr = new XMLHttpRequest();         /* craeting a new xml object */
     xhr.upload.addEventListener("progress", ({loaded, total}) => {
@@ -72,8 +73,7 @@ function uploadFile(name) {
     xhr.send(formData);
 }
 
-/* Handle showing results */
-
+/* Handle show and hide results */
 function toggleResults() {
     const showResultButton = document.querySelector("#show-results-btn");
     const correctAnswers = document.getElementsByClassName('correct-answer');
