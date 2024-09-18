@@ -61,6 +61,13 @@ First, clone the repository to your local machine using the following command:
 ```bash
 $ git clone https://github.com/Saviour99/questify.git
 ```
+#### Step 2: Change Directory
+
+Navigate into the project directory:
+
+```bash
+$ cd questify
+```
 
 ## Usage
 1. **Upload a File**:
