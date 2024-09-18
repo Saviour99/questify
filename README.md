@@ -17,7 +17,7 @@ This experience drove me to take action and create a solution not just for mysel
 This is my Portfolio Project, concluding my Foundations Year at Holberton School. I chose what I wanted to work on, as long as I presented a working program at the end of the development stage.
 [Questify]
 [Blog Post]
-[LinkedIn]
+[LinkedIn](https://www.linkedin.com/in/saviour-assandoh/)
 <br />
 ## Installation
 
