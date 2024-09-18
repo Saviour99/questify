@@ -20,8 +20,7 @@ Visit the live site: [Questify Web App](https://questify.saviourdela.tech/)
 <br />
 Final project blog: [Questify - The Journey](<insert blog URL>)
 <br />
-Connect with the author on LinkedIn:
-- [Saviour Assandoh](https://www.linkedin.com/in/saviour-assandoh/)
+Connect with the author on LinkedIn: [Saviour Assandoh](https://www.linkedin.com/in/saviour-assandoh/)
 <br />
 ## Installation
 
@@ -36,5 +35,5 @@ Connect with the author on LinkedIn:
 
 
 ## Licensing
-
+This project is licensed under the MIT License - see the LICENSE file for details.
 
