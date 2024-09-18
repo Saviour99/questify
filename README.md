@@ -5,7 +5,11 @@
 
 
 ## Introduction
+ ### The Project
 
+ ### Inspiration
+
+ ### The Context
 
 ## Installation
 
