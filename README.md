@@ -32,23 +32,31 @@ Connect with the author on **LinkedIn**: [Saviour Assandoh](https://www.linkedin
    <br />
    ![File Upload](static/images/file2.png)
    <br />
+   <br />
    ![File Upload](static/images/file1.png)
+   <br />
    <br />
 
 3. **Select the Number of Questions**:
    Once your file is uploaded, you will be prompted to select how many MCQs you would like to generate. The system offers preset options, allowing you to choose between 5, 10, 15, or 20 questions. Simply select the number that fits your quiz or exam requirements. This option helps to customize the length of the quiz based on the depth of content you need.
    <br />
+   <br />
    ![Select Number of Questions](static/images/file3.png)
    <br />
+   <br />
    ![Select Number of Questions](static/images/file4.png)
+   <br />
    <br />
 
 5. **Generate the MCQs**:
    After selecting the desired number of questions, click the **Generate** button. Questify will automatically analyze the content of the uploaded file, extract key information, and generate a set of multiple-choice questions (MCQs) based on the text. Each question will be accompanied by four possible answer choices (A, B, C, and D), with one correct answer identified. This process is quick and ensures that the questions are relevant to the content you've uploaded, saving you time and effort.
    <br />
+   <br />
    ![Generate MCQs](static/images/file5.png)
    <br />
+   <br />
    ![Generate MCQs](static/images/file6.png)
+   <br />
    <br />
 ## Contributing
 
