@@ -30,6 +30,7 @@ Connect with the author on **LinkedIn**: [Saviour Assandoh](https://www.linkedin
 1. **Upload a File**:
    To begin creating multiple-choice questions (MCQs), click anywhere within the rectangular area marked by a black dashed line. This will open a file explorer window where you can select and upload your study materials. Questify supports files with the following extensions: `.pdf`, `.txt`, and `.pptx`. These formats are commonly used for course materials like textbooks, lecture notes, and slide presentations.
    <br />
+   <br />
    ![File Upload](static/images/file2.png)
    <br />
    <br />
@@ -58,11 +59,11 @@ Connect with the author on **LinkedIn**: [Saviour Assandoh](https://www.linkedin
    ![Generate MCQs](static/images/file6.png)
    <br />
    <br />
-## Contributing
-
+## Contribution
+Saviour Assandoh is the only contributor at this time
 
 ## Related projects
-
+Here is the [repo](https://github.com/Saviour99/) with all my projects.
 
 ## Licensing
 This project is licensed under the MIT License - see the LICENSE file for details.
