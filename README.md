@@ -18,7 +18,9 @@ This is my Portfolio Project, concluding my Foundations Year at Holberton School
 <br />
 ### Links
 Visit the live site: [Questify Web App](https://questify.saviourdela.tech/)
+<br />
 Final project blog: [Questify - The Journey](<insert blog URL>)
+<br />
 Connect with the author on LinkedIn: [Saviour Assandoh](https://www.linkedin.com/in/saviour-assandoh/)
 <br />
 ## Installation
