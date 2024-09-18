@@ -17,11 +17,11 @@ This experience drove me to take action and create a solution not just for mysel
 This is my Portfolio Project, concluding my Foundations Year at Holberton School. I chose what I wanted to work on, as long as I presented a working program at the end of the development stage.
 <br />
 ### Links
-Visit the live site: [Questify Web App](https://questify.saviourdela.tech/)
+Visit the **live site**: [Questify Web App](https://questify.saviourdela.tech/)
 <br />
-Final project blog: [Questify - The Journey](#)
+Final project **blog**: [Questify - The Journey](#)
 <br />
-Connect with the author on LinkedIn: [Saviour Assandoh](https://www.linkedin.com/in/saviour-assandoh/)
+Connect with the author on **LinkedIn**: [Saviour Assandoh](https://www.linkedin.com/in/saviour-assandoh/)
 <br />
 ## Installation
 
