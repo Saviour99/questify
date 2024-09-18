@@ -14,7 +14,8 @@ As a student at the Kwame Nkrumah University of Science and Technology (KNUST), 
 This experience drove me to take action and create a solution not just for myself, but for other students as well. I developed Questify, a web application designed to bridge this gap by offering students easy access to a platform where they can generate and practice multiple-choice questions. My goal is to provide students at KNUST and beyond with the tools they need to test and strengthen their understanding of the material truly, ultimately making learning more effective and accessible for all.
 <br />
  ### The Context
-
+This is my Portfolio Project, concluding my Foundations Year at Holberton School. I chose what I wanted to work on, as long as I presented a working program at the end of the development stage.
+<br />
 ## Installation
 
 
