@@ -69,6 +69,21 @@ Navigate into the project directory:
 $ cd questify
 ```
 
+#### Step 3: Create and Activate a Virtual Environment
+
+It is highly recommended to use a virtual environment to manage dependencies. Create and activate the virtual environment:
+
+```bash
+$ python3 -m venv venv
+$ source venv/bin/activate
+```
+### Step 4: Install Dependencies
+Install all the required dependencies listed in the requirements.txt file:
+
+```bash
+$ pip install -r requirements.txt
+```
+
 ## Usage
 1. **Upload a File**:
    To begin creating multiple-choice questions (MCQs), click anywhere within the rectangular area marked by a black dashed line. This will open a file explorer window where you can select and upload your study materials. Questify supports files with the following extensions: `.pdf`, `.txt`, and `.pptx`. These formats are commonly used for course materials like textbooks, lecture notes, and slide presentations.
