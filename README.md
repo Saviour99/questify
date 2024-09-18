@@ -65,6 +65,6 @@ Saviour Assandoh is the only contributor at this time
 ## Related projects
 Here is the [repo](https://github.com/Saviour99/) with all my projects.
 
-## Licensing
-This project is licensed under the MIT License - see the LICENSE file for details.
+## Licensing 🔒
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
