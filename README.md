@@ -25,6 +25,36 @@ Connect with the author on **LinkedIn**: [Saviour Assandoh](https://www.linkedin
 <br />
 ## Installation
 
+### Pre-Installation Process
+
+Before starting the installation, ensure you have the following installed and configured:
+
+- **Python 3.x** and **pip**
+- **MySQL** (or another compatible database)
+- **Virtual environment** (recommended)
+
+### Required Software
+
+Questify requires the following dependencies:
+
+- Flask
+- Flask-Migrate
+- Flask-SQLAlchemy
+- spaCy
+- Nginx
+- Gunicorn
+- MySQL-Python Connector
+- PyPDF2
+- python-pptx
+
+### Installation Process
+
+#### Step 1: Clone the Repository
+
+First, clone the repository to your local machine using the following command:
+
+```bash
+$ git clone https://github.com/Saviour99/questify.git
 
 ## Usage
 1. **Upload a File**:
