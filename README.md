@@ -2,7 +2,12 @@
 ![Questify](static/images/file7.png)
 
 ## Table of Content
-
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contribution](#contribution)
+- [Related Projects](#related-projects)
+- [Licensing](#licensing)
 
 ## Introduction
  ### The Project
@@ -55,6 +60,7 @@ First, clone the repository to your local machine using the following command:
 
 ```bash
 $ git clone https://github.com/Saviour99/questify.git
+```
 
 ## Usage
 1. **Upload a File**:
