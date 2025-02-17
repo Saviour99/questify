@@ -13,17 +13,29 @@ from datetime import datetime
 # Load environment variables from .env file
 load_dotenv()
 
+# Debug: Print environment variables
+print("DB_USERNAME:", os.getenv('DB_USERNAME'))
+print("DB_PASSWORD:", os.getenv('DB_PASSWORD'))
+print("DB_NAME:", os.getenv('DB_NAME'))
+print("DB_HOST:", os.getenv('DB_HOST'))
+print("DB_PORT:", os.getenv('DB_PORT'))
+
 # Retrieve environment variables
 DB_USERNAME = os.getenv('DB_USERNAME')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
 DB_NAME = os.getenv('DB_NAME')
-DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_HOST = os.getenv('DB_HOST', 'localhost') 
+DB_PORT = os.getenv('DB_PORT', '3306') 
+
 
 app = Flask(__name__)
 
 # Configure the SQLAlchemy part of the app instance
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
+print("Database URI:", app.config['SQLALCHEMY_DATABASE_URI'])
 
 # Create the SQLAlchemy db instance
 db = SQLAlchemy(app)
@@ -171,4 +183,4 @@ def extract_pptx(file):
     return text
 
 if __name__ == '__main__':
-    app.run(debug=False, port=5000)
+    app.run(debug=True, port=5000)
