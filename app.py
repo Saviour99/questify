@@ -181,6 +181,3 @@ def extract_pptx(file):
             if hasattr(shape, "text"):
                 text += shape.text
     return text
-
-if __name__ == '__main__':
-    app.run(debug=False, port=5000)
